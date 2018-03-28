@@ -28,7 +28,7 @@ public class SpUtils {
      */
     public static <T> List<T> getDataList(String key, Class<T> cls) {
         List<T> datalist = new ArrayList<T>();
-        String strJson = (String) getData(key, "");
+        String strJson = getData(key, "");
 
         if (null == strJson) {
             return datalist;
@@ -68,6 +68,7 @@ public class SpUtils {
         }
         editor.commit();
     }
+
 
     public static <T> T getData(String key, T defaultObject) {
         if (sp == null) {
