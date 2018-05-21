@@ -28,7 +28,6 @@ public abstract class BaseCompatActivity extends SupportActivity {
     protected Context mContext;
     protected boolean isTransAnim;
 
-
     static {
         //5.0以下兼容vector
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);

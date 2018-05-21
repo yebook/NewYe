@@ -2,13 +2,8 @@ package com.kermitye.yesdk.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.kermitye.yesdk.base.BaseApplication;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,22 +22,8 @@ public class SpUtils {
      * @return list
      */
     public static <T> List<T> getDataList(String key, Class<T> cls) {
-        List<T> datalist = new ArrayList<T>();
         String strJson = getData(key, "");
-
-        if (null == strJson) {
-            return datalist;
-        }
-        try {
-//                    datalist = gson.fromJson(strJson, new TypeToken<List<T>>(){}.getType());
-            JsonArray array = new JsonParser().parse(strJson).getAsJsonArray();
-            for (final JsonElement elem : array) {
-                datalist.add(JsonUtils.deserialize(elem, cls));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return datalist;
+        return JsonUtils.deserializeToList(strJson, cls);
     }
 
 

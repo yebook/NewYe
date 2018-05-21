@@ -62,6 +62,8 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttploggingVersion"
+    compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
 
     //fragmentation
     compile "me.yokeyword:fragmentation:$rootProject.fragmentationVersion"
