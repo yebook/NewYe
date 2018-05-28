@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.kermitye.yesdk.bean.ParameterizedTypeImpl;
-import com.kermitye.yesdk.bean.Result;
+import com.kermitye.yesdk.bean.Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -33,8 +33,8 @@ public class JsonUtils {
      * @param <T>
      * @return
      */
-    public static <T> Result<T> fromJsonObject(String json, Class<T> claz) {
-        Type type = new ParameterizedTypeImpl(Result.class, new Class[]{claz});
+    public static <T> Response<T> fromJsonObject(String json, Class<T> claz) {
+        Type type = new ParameterizedTypeImpl(Response.class, new Class[]{claz});
         return JsonUtils.deserialize(json, type);
     }
 
@@ -45,11 +45,11 @@ public class JsonUtils {
      * @param <T>
      * @return
      */
-    public static <T> Result<List<T>> fromJsonArray(String json, Class<T> clazz) {
+    public static <T> Response<List<T>> fromJsonArray(String json, Class<T> clazz) {
         // 生成List<T> 中的 List<T>
         Type listType = new ParameterizedTypeImpl(List.class, new Class[]{clazz});
         // 根据List<T>生成完整的Result<List<T>>
-        Type type = new ParameterizedTypeImpl(Result.class, new Type[]{listType});
+        Type type = new ParameterizedTypeImpl(Response.class, new Type[]{listType});
         return JsonUtils.deserialize(json, type);
     }
 

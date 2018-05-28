@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Author:kermitye
@@ -27,9 +28,9 @@ public class RetrofitCreateHelper {
             //打印日志
             .addInterceptor(interceptor)
             //设置Cache拦截器
-            .addNetworkInterceptor(cacheInterceptor)
-            .addInterceptor(cacheInterceptor)
-            .cache(HttpCache.getCache())
+//            .addNetworkInterceptor(cacheInterceptor)
+//            .addInterceptor(cacheInterceptor)
+//            .cache(HttpCache.getCache())
             //time out
             .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
@@ -43,9 +44,14 @@ public class RetrofitCreateHelper {
                 .baseUrl(url)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         return retrofit.create(clazz);
     }
+
+
+
+
 }

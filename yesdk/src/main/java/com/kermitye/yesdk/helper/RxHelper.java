@@ -1,6 +1,9 @@
 package com.kermitye.yesdk.helper;
 
 
+import com.kermitye.yesdk.bean.Response;
+import com.kermitye.yesdk.error.ApiException;
+
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
@@ -22,6 +25,21 @@ public class RxHelper {
         return upstream -> upstream.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    /**
+     * 服务器错误处理
+     * @param <T>
+     * @return
+     */
+    public static <T> ObservableTransformer<Response<T>, T> trans() {
+        return upstream -> upstream.map(tResponse -> {
+            if (tResponse.code != 0) {
+                throw new ApiException(tResponse.code, tResponse.message);
+            }
+            return tResponse.data;
+        });
+    }
+
 
     /**
      * 生成Flowable
